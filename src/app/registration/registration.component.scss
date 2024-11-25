@@ -1,0 +1,13 @@
+::ng-deep .mat-horizontal-stepper-header{
+    pointer-events: none !important;
+}
+/** No CSS for this example */
+mat-form-field {
+    width: 100%;
+  }
+  /* :host { */
+  ::ng-deep.mat-pseudo-checkbox {
+    display: none !important;
+  }
+  /* } */
+  
