@@ -1,0 +1,44 @@
+name: Angular CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master  # Trigger pipeline on pushes to the main branch
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16  # Use the Node.js version Angular requires
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 4: Run Angular Tests (Optional)
+      - name: Run Tests
+        run: npm test
+        env:
+          CI: true
+
+      # Step 5: Build Angular Project
+      - name: Build Angular App
+        run: npm run build -- --prod
+
+      # Step 6: Deploy to Firebase Hosting (Replace with your deployment platform)
+      - name: Deploy to Firebase
+        run: firebase deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ /0g1sfoQ96A8-lCgYIARAAGBASNwF-L9IrfxgSmHJs9WlB09fZmcaQvGDfS3XGeCwswPx37dTYNUhfMMJPTvQy65nknADZ5YvU360 }}
